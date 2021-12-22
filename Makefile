@@ -1,5 +1,6 @@
 PKG_NAME := fluidsynth
-URL = https://github.com/FluidSynth/fluidsynth/archive/v2.2.3/fluidsynth-2.2.3.tar.gz
+URL = https://github.com/FluidSynth/fluidsynth.git
 ARCHIVES = 
+ARCHIVES_GIT = 
 
 include ../common/Makefile.common

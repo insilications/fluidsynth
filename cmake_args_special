@@ -1,0 +1,14 @@
+-DBUILD_SHARED_LIBS=on
+-Denable-dbus=on
+-Denable-ipv6=off
+-Denable-jack=off
+-Denable-ladspa=on
+-Denable-libsndfile=on
+-Denable-network=on
+-Denable-sdl2=on
+-Denable-pkgconfig=on
+-Denable-pulseaudio=on
+-Denable-pipewire=on
+-Denable-readline=on
+-Denable-threads=on
+-Denable-openmp=on

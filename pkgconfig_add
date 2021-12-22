@@ -1,2 +1,14 @@
 # This file contains additional pkgconfig build requirements that did
 # not get picked up automatically. One name per line, no whitespace.
+alsa
+fftw3f
+gl
+libpulse-simple
+lv2
+readline
+rubberband
+samplerate
+sdl2
+sndfile
+x11
+x11-xcb

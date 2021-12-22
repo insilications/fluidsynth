@@ -1,9 +1,0 @@
-2.2.3
-doxygen
-libxslt-bin
-pkgconfig(alsa)
-pkgconfig(libpulse-simple)
-pkgconfig(readline)
-pkgconfig(sdl2)
-pkgconfig(sndfile)
-readline-dev
