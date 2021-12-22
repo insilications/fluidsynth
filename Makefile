@@ -1,5 +1,5 @@
 PKG_NAME := fluidsynth
-URL = https://github.com/FluidSynth/fluidsynth.git
+URL = /insilications/build/git-clr/fluidsynth-clr/
 ARCHIVES = 
 ARCHIVES_GIT = 
 

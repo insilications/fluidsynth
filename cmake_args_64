@@ -1,4 +1,4 @@
--DBUILD_SHARED_LIBS:BOOL=ON
+-DBUILD_SHARED_LIBS:BOOL=OFF
 -Denable-dbus:BOOL=OFF
 -Denable-ipv6:BOOL=OFF
 -Denable-jack:BOOL=OFF
@@ -14,5 +14,5 @@
 -Denable-readline:BOOL=ON
 -Denable-threads:BOOL=ON
 -Denable-openmp:BOOL=ON
--Denable-coverage:BOOL=OFF
--Denable-profiling:BOOL=OFF
+-Denable-coverage:BOOL=ON
+-Denable-profiling:BOOL=ON
