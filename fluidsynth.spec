@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : fluidsynth
 Version  : 2.2.5
-Release  : 304
+Release  : 305
 URL      : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Summary  : A Real-Time Software Synthesizer That Uses Soundfont(tm)
@@ -496,8 +496,8 @@ staticdev components for the fluidsynth package.
 
 
 %prep
-%setup -q -n fluidsynth-clr
-cd %{_builddir}/fluidsynth-clr
+%setup -q -n fluidsynth
+cd %{_builddir}/fluidsynth
 
 %build
 unset http_proxy
@@ -505,7 +505,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640515569
+export SOURCE_DATE_EPOCH=1640525247
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -602,6 +602,7 @@ export LIBS="${LIBS_GENERATE}"
 -Denable-sdl2:BOOL=OFF \
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
+-Denable-oss:BOOL=OFF \
 -Denable-pulseaudio:BOOL=OFF \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
@@ -675,6 +676,7 @@ export LIBS="${LIBS_USE}"
 -Denable-sdl2:BOOL=OFF \
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
+-Denable-oss:BOOL=OFF \
 -Denable-pulseaudio:BOOL=OFF \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
@@ -789,6 +791,7 @@ export LIBS="${LIBS_GENERATE}"
 -Denable-sdl2:BOOL=OFF \
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
+-Denable-oss:BOOL=OFF \
 -Denable-pulseaudio:BOOL=OFF \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
@@ -862,6 +865,7 @@ export LIBS="${LIBS_USE}"
 -Denable-sdl2:BOOL=OFF \
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
+-Denable-oss:BOOL=OFF \
 -Denable-pulseaudio:BOOL=OFF \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
@@ -882,7 +886,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1640515569
+export SOURCE_DATE_EPOCH=1640525247
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
@@ -1086,10 +1090,6 @@ popd
 /usr/include/fluidsynth/types.h
 /usr/include/fluidsynth/version.h
 /usr/include/fluidsynth/voice.h
-/usr/lib64/cmake/fluidsynth/FluidSynthConfig.cmake
-/usr/lib64/cmake/fluidsynth/FluidSynthConfigVersion.cmake
-/usr/lib64/cmake/fluidsynth/FluidSynthTargets-none.cmake
-/usr/lib64/cmake/fluidsynth/FluidSynthTargets.cmake
 /usr/lib64/libfluidsynth.so
 /usr/lib64/pkgconfig/fluidsynth.pc
 
