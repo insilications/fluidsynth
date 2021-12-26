@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : fluidsynth
 Version  : 2.2.5
-Release  : 301
+Release  : 302
 URL      : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Summary  : A Real-Time Software Synthesizer That Uses Soundfont(tm)
@@ -88,9 +88,6 @@ BuildRequires : flac-dev32
 BuildRequires : flac-staticdev
 BuildRequires : flac-staticdev32
 BuildRequires : flex
-BuildRequires : fluidsynth
-BuildRequires : fluidsynth-dev
-BuildRequires : fluidsynth-staticdev
 BuildRequires : fmt
 BuildRequires : fmt-dev
 BuildRequires : fmt-staticdev
@@ -508,7 +505,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640510393
+export SOURCE_DATE_EPOCH=1640511436
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -885,7 +882,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1640510393
+export SOURCE_DATE_EPOCH=1640511436
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content

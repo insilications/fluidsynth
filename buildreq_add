@@ -68,9 +68,6 @@ flac-dev32
 flac-staticdev
 flac-staticdev32
 flex
-fluidsynth
-fluidsynth-dev
-fluidsynth-staticdev
 fmt
 fmt-dev
 fmt-staticdev
