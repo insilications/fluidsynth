@@ -26,5 +26,5 @@ export QT_IM_MODULE="cedilla"
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 export PLASMA_USE_QT_SCALING=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
-make -j1 check V=1 VERBOSE=1 || :
+make -j16 check V=1 VERBOSE=1 || :
 # ctest --parallel 1 --verbose --progress || :

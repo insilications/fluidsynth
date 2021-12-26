@@ -4,10 +4,10 @@
 #
 %define keepstatic 1
 Name     : fluidsynth
-Version  : 2.2.4
-Release  : 213
-URL      : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.4.tar.gz
-Source0  : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.4.tar.gz
+Version  : 2.2.5
+Release  : 301
+URL      : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
+Source0  : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Summary  : A Real-Time Software Synthesizer That Uses Soundfont(tm)
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1+
@@ -508,7 +508,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640509216
+export SOURCE_DATE_EPOCH=1640510393
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -653,7 +653,7 @@ export QT_IM_MODULE="cedilla"
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 export PLASMA_USE_QT_SCALING=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
-make -j1 check V=1 VERBOSE=1 || :
+make -j16 check V=1 VERBOSE=1 || :
 # ctest --parallel 1 --verbose --progress || :
 export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
@@ -840,7 +840,7 @@ export QT_IM_MODULE="cedilla"
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 export PLASMA_USE_QT_SCALING=1
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
-make -j1 check V=1 VERBOSE=1 || :
+make -j16 check V=1 VERBOSE=1 || :
 # ctest --parallel 1 --verbose --progress || :
 export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
@@ -885,7 +885,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1640509216
+export SOURCE_DATE_EPOCH=1640510393
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
