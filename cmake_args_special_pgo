@@ -5,13 +5,13 @@
 -Denable-network:BOOL=OFF
 -Denable-sdl2:BOOL=OFF
 -Denable-systemd:BOOL=OFF
+-Denable-readline:BOOL=OFF
+-Denable-pulseaudio:BOOL=OFF
 -Denable-ladspa:BOOL=ON
 -Denable-libsndfile:BOOL=ON
 -Denable-pkgconfig:BOOL=ON
--Denable-pulseaudio:BOOL=ON
 -Denable-pipewire:BOOL=ON
 -Denable-alsa:BOOL=ON
--Denable-readline:BOOL=ON
 -Denable-threads:BOOL=ON
 -Denable-openmp:BOOL=ON
 -Denable-coverage:BOOL=OFF
