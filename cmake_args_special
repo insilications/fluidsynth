@@ -15,5 +15,5 @@
 -Denable-alsa:BOOL=ON
 -Denable-threads:BOOL=ON
 -Denable-openmp:BOOL=ON
--Denable-coverage:BOOL=ON
--Denable-profiling:BOOL=ON
+-Denable-coverage:BOOL=OFF
+-Denable-profiling:BOOL=OFF
