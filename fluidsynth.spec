@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : fluidsynth
 Version  : 2.2.5
-Release  : 303
+Release  : 304
 URL      : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Summary  : A Real-Time Software Synthesizer That Uses Soundfont(tm)
@@ -505,7 +505,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640512431
+export SOURCE_DATE_EPOCH=1640515569
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -615,7 +615,7 @@ export LIBS="${LIBS_GENERATE}"
 ## make_prepend content
 sd "/usr/lib64/libfftw3.so" "/usr/lib64/libfftw3.a" $(fd -uu link.txt) $(fd -uu flags.make)
 sd "/usr/lib64/libsamplerate.so" "/usr/lib64/libsamplerate.a" $(fd -uu link.txt) $(fd -uu flags.make)
-sd "/usr/lib64/libsndfile.so" "/usr/lib64/libsndfile.a /usr/lib64/libFLAC.a /usr/lib64/libopus.a /usr/lib64/libvorbis.a /usr/lib64/libvorbisenc.a /usr/lib64/libvorbisfile.a /usr/lib64/libogg.a" $(fd -uu link.txt) $(fd -uu flags.make)
+sd "/usr/lib64/libsndfile.so" -- "-Wl,--whole-archive,--allow-multiple-definition,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,--no-whole-archive" $(fd -uu link.txt) $(fd -uu flags.make)
 ## make_prepend end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 
@@ -688,7 +688,7 @@ export LIBS="${LIBS_USE}"
 ## make_prepend content
 sd "/usr/lib64/libfftw3.so" "/usr/lib64/libfftw3.a" $(fd -uu link.txt) $(fd -uu flags.make)
 sd "/usr/lib64/libsamplerate.so" "/usr/lib64/libsamplerate.a" $(fd -uu link.txt) $(fd -uu flags.make)
-sd "/usr/lib64/libsndfile.so" "/usr/lib64/libsndfile.a /usr/lib64/libFLAC.a /usr/lib64/libopus.a /usr/lib64/libvorbis.a /usr/lib64/libvorbisenc.a /usr/lib64/libvorbisfile.a /usr/lib64/libogg.a" $(fd -uu link.txt) $(fd -uu flags.make)
+sd "/usr/lib64/libsndfile.so" -- "-Wl,--whole-archive,--allow-multiple-definition,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,--no-whole-archive" $(fd -uu link.txt) $(fd -uu flags.make)
 ## make_prepend end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 fi
@@ -802,7 +802,7 @@ export LIBS="${LIBS_GENERATE}"
 ## make_prepend content
 sd "/usr/lib64/libfftw3.so" "/usr/lib64/libfftw3.a" $(fd -uu link.txt) $(fd -uu flags.make)
 sd "/usr/lib64/libsamplerate.so" "/usr/lib64/libsamplerate.a" $(fd -uu link.txt) $(fd -uu flags.make)
-sd "/usr/lib64/libsndfile.so" "/usr/lib64/libsndfile.a /usr/lib64/libFLAC.a /usr/lib64/libopus.a /usr/lib64/libvorbis.a /usr/lib64/libvorbisenc.a /usr/lib64/libvorbisfile.a /usr/lib64/libogg.a" $(fd -uu link.txt) $(fd -uu flags.make)
+sd "/usr/lib64/libsndfile.so" -- "-Wl,--whole-archive,--allow-multiple-definition,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,--no-whole-archive" $(fd -uu link.txt) $(fd -uu flags.make)
 ## make_prepend end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 
@@ -875,14 +875,14 @@ export LIBS="${LIBS_USE}"
 ## make_prepend content
 sd "/usr/lib64/libfftw3.so" "/usr/lib64/libfftw3.a" $(fd -uu link.txt) $(fd -uu flags.make)
 sd "/usr/lib64/libsamplerate.so" "/usr/lib64/libsamplerate.a" $(fd -uu link.txt) $(fd -uu flags.make)
-sd "/usr/lib64/libsndfile.so" "/usr/lib64/libsndfile.a /usr/lib64/libFLAC.a /usr/lib64/libopus.a /usr/lib64/libvorbis.a /usr/lib64/libvorbisenc.a /usr/lib64/libvorbisfile.a /usr/lib64/libogg.a" $(fd -uu link.txt) $(fd -uu flags.make)
+sd "/usr/lib64/libsndfile.so" -- "-Wl,--whole-archive,--allow-multiple-definition,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,--no-whole-archive" $(fd -uu link.txt) $(fd -uu flags.make)
 ## make_prepend end
 make  %{?_smp_mflags}    V=1 VERBOSE=1
 fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1640512431
+export SOURCE_DATE_EPOCH=1640515569
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
