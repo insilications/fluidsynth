@@ -5,13 +5,16 @@
 %define keepstatic 1
 Name     : fluidsynth
 Version  : 2.2.5
-Release  : 320
+Release  : 321
 URL      : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Source1  : file:///aot/build/clearlinux/packages/fluidsynth/tests.tar.gz
 Summary  : A Real-Time Software Synthesizer That Uses Soundfont(tm)
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1+
+Requires: fluidsynth-bin = %{version}-%{release}
+Requires: fluidsynth-lib = %{version}-%{release}
+Requires: fluidsynth-man = %{version}-%{release}
 BuildRequires : PyYAML
 BuildRequires : Pygments
 BuildRequires : SDL2
@@ -449,6 +452,51 @@ based on the SoundFont(tm) 2 specifications. It can read MIDI events
 from the MIDI input device and render them to the audio device. It
 can also play MIDI files.
 
+%package bin
+Summary: bin components for the fluidsynth package.
+Group: Binaries
+
+%description bin
+bin components for the fluidsynth package.
+
+
+%package dev
+Summary: dev components for the fluidsynth package.
+Group: Development
+Requires: fluidsynth-lib = %{version}-%{release}
+Requires: fluidsynth-bin = %{version}-%{release}
+Provides: fluidsynth-devel = %{version}-%{release}
+Requires: fluidsynth = %{version}-%{release}
+
+%description dev
+dev components for the fluidsynth package.
+
+
+%package lib
+Summary: lib components for the fluidsynth package.
+Group: Libraries
+
+%description lib
+lib components for the fluidsynth package.
+
+
+%package man
+Summary: man components for the fluidsynth package.
+Group: Default
+
+%description man
+man components for the fluidsynth package.
+
+
+%package staticdev
+Summary: staticdev components for the fluidsynth package.
+Group: Default
+Requires: fluidsynth-dev = %{version}-%{release}
+
+%description staticdev
+staticdev components for the fluidsynth package.
+
+
 %prep
 %setup -q -n fluidsynth
 cd %{_builddir}
@@ -466,7 +514,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640835889
+export SOURCE_DATE_EPOCH=1640836117
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -631,9 +679,8 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # ctest --parallel 1 --verbose --progress || :
 pushd src/
 # timeout 18s ./fluidsynth ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid || :
-timeout 14s ./fluidsynth ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid > /dev/null 2>&1 || :
+timeout 18s ./fluidsynth ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid > /dev/null 2>&1 || :
 popd
-exit 1
 export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/gbm:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/gbm:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 ## profile_payload end
@@ -843,9 +890,8 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # ctest --parallel 1 --verbose --progress || :
 pushd src/
 # timeout 18s ./fluidsynth ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid || :
-timeout 14s ./fluidsynth ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid > /dev/null 2>&1 || :
+timeout 18s ./fluidsynth ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid > /dev/null 2>&1 || :
 popd
-exit 1
 export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/gbm:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/gbm:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 ## profile_payload end
@@ -893,7 +939,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1640835889
+export SOURCE_DATE_EPOCH=1640836117
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
@@ -1096,3 +1142,43 @@ popd
 
 %files
 %defattr(-,root,root,-)
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/fluidsynth
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/fluidsynth.h
+/usr/include/fluidsynth/audio.h
+/usr/include/fluidsynth/event.h
+/usr/include/fluidsynth/gen.h
+/usr/include/fluidsynth/ladspa.h
+/usr/include/fluidsynth/log.h
+/usr/include/fluidsynth/midi.h
+/usr/include/fluidsynth/misc.h
+/usr/include/fluidsynth/mod.h
+/usr/include/fluidsynth/seq.h
+/usr/include/fluidsynth/seqbind.h
+/usr/include/fluidsynth/settings.h
+/usr/include/fluidsynth/sfont.h
+/usr/include/fluidsynth/shell.h
+/usr/include/fluidsynth/synth.h
+/usr/include/fluidsynth/types.h
+/usr/include/fluidsynth/version.h
+/usr/include/fluidsynth/voice.h
+/usr/lib64/libfluidsynth.so
+/usr/lib64/pkgconfig/fluidsynth.pc
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/libfluidsynth.so.3
+/usr/lib64/libfluidsynth.so.3.0.4
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/fluidsynth.1
+
+%files staticdev
+%defattr(-,root,root,-)
+/usr/lib64/libfluidsynth.a
