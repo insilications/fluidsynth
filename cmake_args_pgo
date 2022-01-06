@@ -2,7 +2,7 @@
 -Denable-dbus:BOOL=OFF
 -Denable-ipv6:BOOL=OFF
 -Denable-jack:BOOL=OFF
--Denable-network:BOOL=OFF
+-Denable-network:BOOL=ON
 -Denable-sdl2:BOOL=OFF
 -Denable-systemd:BOOL=OFF
 -Denable-readline:BOOL=OFF
