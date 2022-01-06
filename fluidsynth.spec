@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : fluidsynth
 Version  : 2.2.5
-Release  : 322
+Release  : 323
 URL      : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Source1  : file:///aot/build/clearlinux/packages/fluidsynth/tests.tar.gz
@@ -514,7 +514,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641498639
+export SOURCE_DATE_EPOCH=1641506410
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -625,7 +625,7 @@ export LIBS="${LIBS_GENERATE}"
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
 -Denable-oss:BOOL=OFF \
--Denable-pulseaudio:BOOL=OFF \
+-Denable-pulseaudio:BOOL=ON \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
 -Denable-pkgconfig:BOOL=ON \
@@ -706,7 +706,7 @@ export LIBS="${LIBS_USE}"
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
 -Denable-oss:BOOL=OFF \
--Denable-pulseaudio:BOOL=OFF \
+-Denable-pulseaudio:BOOL=ON \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
 -Denable-pkgconfig:BOOL=ON \
@@ -837,7 +837,7 @@ export LIBS="${LIBS_GENERATE}"
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
 -Denable-oss:BOOL=OFF \
--Denable-pulseaudio:BOOL=OFF \
+-Denable-pulseaudio:BOOL=ON \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
 -Denable-pkgconfig:BOOL=ON \
@@ -918,7 +918,7 @@ export LIBS="${LIBS_USE}"
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
 -Denable-oss:BOOL=OFF \
--Denable-pulseaudio:BOOL=OFF \
+-Denable-pulseaudio:BOOL=ON \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
 -Denable-pkgconfig:BOOL=ON \
@@ -941,7 +941,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1641498639
+export SOURCE_DATE_EPOCH=1641506410
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
