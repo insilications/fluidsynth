@@ -12,7 +12,7 @@
 -Denable-systemd:BOOL=OFF
 -Denable-readline:BOOL=OFF
 -Denable-oss:BOOL=OFF
--Denable-pulseaudio:BOOL=ON
+-Denable-pulseaudio:BOOL=OFF
 -Denable-ladspa:BOOL=ON
 -Denable-libsndfile:BOOL=ON
 -Denable-pkgconfig:BOOL=ON

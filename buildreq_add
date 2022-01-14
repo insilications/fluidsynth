@@ -13,9 +13,7 @@ appstream-glib-dev
 atk
 atk-dev
 atkmm-dev
-krb5-dev
 autogen
-gcovr
 autogen-dev
 automake
 automake-dev
@@ -91,6 +89,7 @@ gcc-libs-math
 gcc-libstdc++32
 gcc-libubsan
 gcc-locale
+gcovr
 gdb-dev
 gdk-pixbuf
 gdk-pixbuf-dev
@@ -357,6 +356,8 @@ Vulkan-Headers-dev
 Vulkan-Loader-dev
 wayland
 wayland-dev
+wireplumber
+wireplumber-dev
 xauth
 xclip
 xdg-dbus-proxy

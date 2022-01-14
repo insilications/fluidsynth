@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : fluidsynth
 Version  : 2.2.5
-Release  : 324
+Release  : 326
 URL      : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Source1  : file:///aot/build/clearlinux/packages/fluidsynth/tests.tar.gz
@@ -380,6 +380,8 @@ BuildRequires : vamp-sdk-dev
 BuildRequires : vamp-sdk-staticdev
 BuildRequires : wayland
 BuildRequires : wayland-dev
+BuildRequires : wireplumber
+BuildRequires : wireplumber-dev
 BuildRequires : xauth
 BuildRequires : xclip
 BuildRequires : xdg-dbus-proxy
@@ -464,7 +466,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1642161390
+export SOURCE_DATE_EPOCH=1642162312
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -567,6 +569,11 @@ export LDFLAGS="${LDFLAGS_GENERATE}"
 export ASMFLAGS="${ASMFLAGS_GENERATE}"
 export LIBS="${LIBS_GENERATE}"
 %cmake ..   -DBUILD_SHARED_LIBS:BOOL=OFF \
+-Denable-floats:BOOL=OFF \
+-Denable-trap-on-fpe:BOOL=OFF \
+-Denable-ubsan:BOOL=OFF \
+-Denable-portaudio:BOOL=OFF \
+-Denable-dsound:BOOL=OFF \
 -Denable-dbus:BOOL=OFF \
 -Denable-ipv6:BOOL=OFF \
 -Denable-jack:BOOL=OFF \
@@ -584,37 +591,7 @@ export LIBS="${LIBS_GENERATE}"
 -Denable-threads:BOOL=ON \
 -Denable-openmp:BOOL=ON \
 -Denable-coverage:BOOL=OFF \
--Denable-profiling:BOOL=OFF \
-option ( enable-coverage "enable gcov code coverage" off ) \
-option ( enable-floats "enable type float instead of double for DSP samples" off ) \
-option ( enable-fpe-check "enable Floating Point Exception checks and debug messages" off ) \
-option ( enable-portaudio "compile PortAudio support" off ) \
-option ( enable-profiling "profile the dsp code" off ) \
-option ( enable-trap-on-fpe "enable SIGFPE trap on Floating Point Exceptions" off ) \
-option ( enable-ubsan "compile and link against UBSan (for debugging fluidsynth internals)" off ) \
-option ( enable-aufile "compile support for sound file output" on ) \
-option ( BUILD_SHARED_LIBS "Build a shared object or DLL" on ) \
-option ( enable-dbus "compile DBUS support (if it is available)" on ) \
-option ( enable-ipv6  "enable ipv6 support" on ) \
-option ( enable-jack "compile JACK support (if it is available)" on ) \
-option ( enable-ladspa "enable LADSPA effect units" on ) \
-option ( enable-libinstpatch "use libinstpatch (if available) to load DLS and GIG files" on ) \
-option ( enable-libsndfile "compile libsndfile support (if it is available)" on ) \
-option ( enable-midishare "compile MidiShare support (if it is available)" on ) \
-option ( enable-opensles "compile OpenSLES support (if it is available)" off ) \
-option ( enable-oboe "compile Oboe support (requires OpenSLES and/or AAudio)" off ) \
-option ( enable-network "enable network support (requires BSD sockets)" on ) \
-option ( enable-oss "compile OSS support (if it is available)" on ) \
-option ( enable-dsound "compile DirectSound support (if it is available)" on ) \
-option ( enable-wasapi "compile Windows WASAPI support (if it is available)" on ) \
-option ( enable-waveout "compile Windows WaveOut support (if it is available)" on ) \
-option ( enable-winmidi "compile Windows MIDI support (if it is available)" on ) \
-option ( enable-sdl2 "compile SDL2 audio support (if it is available)" on ) \
-option ( enable-pulseaudio "compile PulseAudio support (if it is available)" on ) \
-option ( enable-pipewire "compile PipeWire support (if it is available)" on ) \
-option ( enable-readline "compile readline lib line editing (if it is available)" on ) \
-option ( enable-threads "enable multi-threading support (such as parallel voice synthesis)" on ) \
-option ( enable-openmp "enable OpenMP support (parallelization of soundfont decoding, vectorization of voice mixing, etc.)" on )
+-Denable-profiling:BOOL=OFF
 ## make_prepend content
 sd '/usr/lib64/libfftw3\.so' -- '-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libfftw3.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu link.txt) $(fd -uu flags.make)
 sd '/usr/lib64/libsamplerate\.so' -- '-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libsamplerate.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu link.txt) $(fd -uu flags.make)
@@ -628,6 +605,7 @@ make  %{?_smp_mflags}    V=1 VERBOSE=1
 ## profile_payload start
 unset LD_LIBRARY_PATH
 unset LIBRARY_PATH
+exit 1
 export DISPLAY=:0
 export __GL_SYNC_TO_VBLANK=1
 export __GL_SYNC_DISPLAY_DEVICE=HDMI-0
@@ -654,8 +632,15 @@ export FONTCONFIG_PATH="/usr/share/defaults/fonts"
 export GTK_IM_MODULE="xim"
 export QT_IM_MODULE="cedilla"
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
+export NO_AT_BRIDGE=1
+export GTK_A11Y=none
 export PLASMA_USE_QT_SCALING=1
-export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_ENABLE_HIGHDPI_SCALING=0
+export QT_FONT_DPI=88
+export GTK_USE_PORTAL=1
+export DESKTOP_SESSION=plasma
+export GSETTINGS_SCHEMA_DIR="/usr/share/glib-2.0/schemas"
 # make -j16 check V=1 VERBOSE=1
 # ctest --parallel 1 --verbose --progress || :
 pushd src/
@@ -678,6 +663,11 @@ export LDFLAGS="${LDFLAGS_USE}"
 export ASMFLAGS="${ASMFLAGS_USE}"
 export LIBS="${LIBS_USE}"
 %cmake .. -DBUILD_SHARED_LIBS:BOOL=OFF \
+-Denable-floats:BOOL=OFF \
+-Denable-trap-on-fpe:BOOL=OFF \
+-Denable-ubsan:BOOL=OFF \
+-Denable-portaudio:BOOL=OFF \
+-Denable-dsound:BOOL=OFF \
 -Denable-dbus:BOOL=OFF \
 -Denable-ipv6:BOOL=OFF \
 -Denable-jack:BOOL=OFF \
@@ -809,6 +799,11 @@ export LDFLAGS="${LDFLAGS_GENERATE}"
 export ASMFLAGS="${ASMFLAGS_GENERATE}"
 export LIBS="${LIBS_GENERATE}"
 %cmake .. -DBUILD_SHARED_LIBS:BOOL=ON \
+-Denable-floats:BOOL=OFF \
+-Denable-trap-on-fpe:BOOL=OFF \
+-Denable-ubsan:BOOL=OFF \
+-Denable-portaudio:BOOL=OFF \
+-Denable-dsound:BOOL=OFF \
 -Denable-dbus:BOOL=OFF \
 -Denable-ipv6:BOOL=OFF \
 -Denable-jack:BOOL=OFF \
@@ -840,6 +835,7 @@ make  %{?_smp_mflags}    V=1 VERBOSE=1
 ## profile_payload start
 unset LD_LIBRARY_PATH
 unset LIBRARY_PATH
+exit 1
 export DISPLAY=:0
 export __GL_SYNC_TO_VBLANK=1
 export __GL_SYNC_DISPLAY_DEVICE=HDMI-0
@@ -866,8 +862,15 @@ export FONTCONFIG_PATH="/usr/share/defaults/fonts"
 export GTK_IM_MODULE="xim"
 export QT_IM_MODULE="cedilla"
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
+export NO_AT_BRIDGE=1
+export GTK_A11Y=none
 export PLASMA_USE_QT_SCALING=1
-export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_ENABLE_HIGHDPI_SCALING=0
+export QT_FONT_DPI=88
+export GTK_USE_PORTAL=1
+export DESKTOP_SESSION=plasma
+export GSETTINGS_SCHEMA_DIR="/usr/share/glib-2.0/schemas"
 # make -j16 check V=1 VERBOSE=1
 # ctest --parallel 1 --verbose --progress || :
 pushd src/
@@ -890,6 +893,11 @@ export LDFLAGS="${LDFLAGS_USE}"
 export ASMFLAGS="${ASMFLAGS_USE}"
 export LIBS="${LIBS_USE}"
 %cmake .. -DBUILD_SHARED_LIBS:BOOL=ON \
+-Denable-floats:BOOL=OFF \
+-Denable-trap-on-fpe:BOOL=OFF \
+-Denable-ubsan:BOOL=OFF \
+-Denable-portaudio:BOOL=OFF \
+-Denable-dsound:BOOL=OFF \
 -Denable-dbus:BOOL=OFF \
 -Denable-ipv6:BOOL=OFF \
 -Denable-jack:BOOL=OFF \
@@ -921,7 +929,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1642161390
+export SOURCE_DATE_EPOCH=1642162312
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
