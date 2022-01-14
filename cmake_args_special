@@ -1,4 +1,9 @@
 -DBUILD_SHARED_LIBS:BOOL=ON
+-Denable-floats:BOOL=OFF
+-Denable-trap-on-fpe:BOOL=OFF
+-Denable-ubsan:BOOL=OFF
+-Denable-portaudio:BOOL=OFF
+-Denable-dsound:BOOL=OFF
 -Denable-dbus:BOOL=OFF
 -Denable-ipv6:BOOL=OFF
 -Denable-jack:BOOL=OFF
