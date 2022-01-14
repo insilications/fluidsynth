@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : fluidsynth
 Version  : 2.2.5
-Release  : 326
+Release  : 328
 URL      : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/fluidsynth/fluidsynth-v2.2.5.tar.gz
 Source1  : file:///aot/build/clearlinux/packages/fluidsynth/tests.tar.gz
@@ -466,7 +466,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1642162312
+export SOURCE_DATE_EPOCH=1642169552
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -582,7 +582,7 @@ export LIBS="${LIBS_GENERATE}"
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
 -Denable-oss:BOOL=OFF \
--Denable-pulseaudio:BOOL=ON \
+-Denable-pulseaudio:BOOL=OFF \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
 -Denable-pkgconfig:BOOL=ON \
@@ -605,7 +605,6 @@ make  %{?_smp_mflags}    V=1 VERBOSE=1
 ## profile_payload start
 unset LD_LIBRARY_PATH
 unset LIBRARY_PATH
-exit 1
 export DISPLAY=:0
 export __GL_SYNC_TO_VBLANK=1
 export __GL_SYNC_DISPLAY_DEVICE=HDMI-0
@@ -641,10 +640,14 @@ export QT_FONT_DPI=88
 export GTK_USE_PORTAL=1
 export DESKTOP_SESSION=plasma
 export GSETTINGS_SCHEMA_DIR="/usr/share/glib-2.0/schemas"
-# make -j16 check V=1 VERBOSE=1
-# ctest --parallel 1 --verbose --progress || :
+#
 pushd src/
-# timeout 18s ./fluidsynth ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid || :
+export LD_LIBRARY_PATH="$PWD:/usr/local/nvidia/lib64:/usr/local/nvidia/lib64/gbm:/usr/local/nvidia/lib64/vdpau:/usr/local/nvidia/lib64/xorg/modules/drivers:/usr/local/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/local/nvidia/lib32:/usr/local/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+export LIBRARY_PATH="$PWD:/usr/local/nvidia/lib64:/usr/local/nvidia/lib64/gbm:/usr/local/nvidia/lib64/vdpau:/usr/local/nvidia/lib64/xorg/modules/drivers:/usr/local/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/local/nvidia/lib32:/usr/local/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+popd
+make -j12 check V=1 VERBOSE=1 || :
+pushd src/
+timeout 18s ./fluidsynth -a pipewire ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid > /dev/null 2>&1 || :
 timeout 18s ./fluidsynth ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid > /dev/null 2>&1 || :
 popd
 export LD_LIBRARY_PATH="/usr/local/nvidia/lib64:/usr/local/nvidia/lib64/gbm:/usr/local/nvidia/lib64/vdpau:/usr/local/nvidia/lib64/xorg/modules/drivers:/usr/local/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/local/nvidia/lib32:/usr/local/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
@@ -676,7 +679,7 @@ export LIBS="${LIBS_USE}"
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
 -Denable-oss:BOOL=OFF \
--Denable-pulseaudio:BOOL=ON \
+-Denable-pulseaudio:BOOL=OFF \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
 -Denable-pkgconfig:BOOL=ON \
@@ -812,7 +815,7 @@ export LIBS="${LIBS_GENERATE}"
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
 -Denable-oss:BOOL=OFF \
--Denable-pulseaudio:BOOL=ON \
+-Denable-pulseaudio:BOOL=OFF \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
 -Denable-pkgconfig:BOOL=ON \
@@ -835,7 +838,6 @@ make  %{?_smp_mflags}    V=1 VERBOSE=1
 ## profile_payload start
 unset LD_LIBRARY_PATH
 unset LIBRARY_PATH
-exit 1
 export DISPLAY=:0
 export __GL_SYNC_TO_VBLANK=1
 export __GL_SYNC_DISPLAY_DEVICE=HDMI-0
@@ -871,10 +873,14 @@ export QT_FONT_DPI=88
 export GTK_USE_PORTAL=1
 export DESKTOP_SESSION=plasma
 export GSETTINGS_SCHEMA_DIR="/usr/share/glib-2.0/schemas"
-# make -j16 check V=1 VERBOSE=1
-# ctest --parallel 1 --verbose --progress || :
+#
 pushd src/
-# timeout 18s ./fluidsynth ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid || :
+export LD_LIBRARY_PATH="$PWD:/usr/local/nvidia/lib64:/usr/local/nvidia/lib64/gbm:/usr/local/nvidia/lib64/vdpau:/usr/local/nvidia/lib64/xorg/modules/drivers:/usr/local/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/local/nvidia/lib32:/usr/local/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+export LIBRARY_PATH="$PWD:/usr/local/nvidia/lib64:/usr/local/nvidia/lib64/gbm:/usr/local/nvidia/lib64/vdpau:/usr/local/nvidia/lib64/xorg/modules/drivers:/usr/local/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/local/nvidia/lib32:/usr/local/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+popd
+make -j12 check V=1 VERBOSE=1 || :
+pushd src/
+timeout 18s ./fluidsynth -a pipewire ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid > /dev/null 2>&1 || :
 timeout 18s ./fluidsynth ../../tests/default.sf2 ../../tests/Queen_-_Bohemian_Rhapsody.mid > /dev/null 2>&1 || :
 popd
 export LD_LIBRARY_PATH="/usr/local/nvidia/lib64:/usr/local/nvidia/lib64/gbm:/usr/local/nvidia/lib64/vdpau:/usr/local/nvidia/lib64/xorg/modules/drivers:/usr/local/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/local/nvidia/lib32:/usr/local/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
@@ -906,7 +912,7 @@ export LIBS="${LIBS_USE}"
 -Denable-systemd:BOOL=OFF \
 -Denable-readline:BOOL=OFF \
 -Denable-oss:BOOL=OFF \
--Denable-pulseaudio:BOOL=ON \
+-Denable-pulseaudio:BOOL=OFF \
 -Denable-ladspa:BOOL=ON \
 -Denable-libsndfile:BOOL=ON \
 -Denable-pkgconfig:BOOL=ON \
@@ -929,7 +935,7 @@ fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1642162312
+export SOURCE_DATE_EPOCH=1642169552
 rm -rf %{buildroot}
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
