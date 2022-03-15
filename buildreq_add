@@ -303,7 +303,7 @@ python-graphviz
 PyYAML
 rdflib
 readline-dev
-requests
+pypi-requests
 rnnoise
 rnnoise-dev
 rnnoise-staticdev
